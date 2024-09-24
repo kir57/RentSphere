@@ -1,0 +1,29 @@
+<!-- views/rent.ejs -->
+<% layout("/layouts/boilerplate") -%>
+
+<div class="container mt-5">
+    <h2>My Rentals</h2>
+
+    <% if (rentals && rentals.length > 0) { %>
+        <div class="row">
+            <% rentals.forEach(rental => { %>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="<%= rental.listing.image.url %>" class="card-img-top" alt="listing-image">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= rental.listing.title %></h5>
+                            <p class="card-text">&#8377;<%= rental.listing.price.toLocaleString("en-IN") %></p>
+                            <p class="card-text">Rented Date: <%= new Date(rental.rentDate).toLocaleDateString() %></p>
+                            <form action="/rentals/<%= rental.listing._id %>/cancel" method="POST">
+                                <input type="hidden" name="rentDate" value="<%= rental.rentDate.toISOString() %>">
+                                <button type="submit" class="btn btn-danger">Cancel Rental</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <h3>No rentals found</h3>
+    <% } %>
+</div>

@@ -1,0 +1,92 @@
+<% layout("/layouts/boilerplate") -%>
+<style>
+   .rentel{
+    margin-top: 23px;
+ }
+</style>
+
+    <div class="available-listings">
+     
+
+      <div class="available-listings">
+        <div class="container mt-5">
+            <!-- <h2>Available Listings</h2> -->
+    
+            <!-- Combined Date Picker and Location Search Form -->
+  <form class="row g-3 mb-5" action="/listings" method="GET">
+    <!-- Location Search -->
+    <div class="col-auto hid">
+        <label for="location" class="form-label">Search by Location</label>
+        <input type="text" id="location" name="location" class="form-control" value="<%= location || '' %>" placeholder="Enter location">
+    </div>
+
+    <!-- Date Picker -->
+    <div class="col-auto">
+        <label for="rentDate" class="form-label"><i>Select Rent Date</i></label>
+        <input type="date" id="rentDate" name="rentDate" class="form-control" value="<%= rentDate || '' %>">
+    </div>
+
+    <!-- Search Button -->
+    <div class="col-auto rentel">
+        <button type="submit" class="btn btn-dark mt-4">Search Listings</button>
+    </div>
+</form>
+    
+            <!-- Display Listings -->
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+              <%for(let listing of listings){ %>
+                  <a href="/listings/<%=listing._id%>" class="listing-link">
+              <div class="card" style="width: 20rem;">
+                  <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem;"/>
+                  <div class="card-img-overlay"></div>
+                  <div class="card-body">
+                    <p class="card-text">
+                      <b><%= listing.title %></b><br>
+                      &#8377;<%=listing.price.toLocaleString("en-IN")%> / night
+                  </p>
+                  </div>
+                </div>
+              </a>
+                <%} %>
+              </div>
+
+        </div>
+    </div>
+        
+    </div>
+    
+    </div>
+
+    <!--  -->
+
+    <!-- <ul>
+        <%for(let listing of listings){ %>
+            <li><a href="/listings/<%=listing._id %>"><%=listing.title %></a></5></li>
+            <%} %>
+    </ul> -->
+
+<script>
+  let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+  taxSwitch.addEventListener()
+</script>
+
+<script>
+  document.getElementById('rentDate').addEventListener('change', function() {
+      const selectedDate = this.value;
+      document.getElementById('navbarRentDate').value = selectedDate;
+  });
+</script>
+
+<script>
+  document.getElementById('rentDate').addEventListener('change', function() {
+      const selectedDate = this.value;
+      const navbarRentDate = document.getElementById('navbarRentDate');
+      if(navbarRentDate){
+          navbarRentDate.value = selectedDate;
+      }
+  });
+</script>
+
+
+
+
